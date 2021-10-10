@@ -1,3 +1,6 @@
+#! /usr/bin/python3
+import sys
+
 class Menu:
     '''muestra el menu y lanza la función elegida'''
 
