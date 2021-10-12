@@ -5,5 +5,5 @@ class Repositorio:
     '''Consulta y escribe en la BD. Clase madre de los otros repositorios'''
 
     def __init__(self):
-        self.bd = sqlite3.connect("bd.sqlite")
+        self.bd = sqlite3.connect("dbConsultorioMedico.sqlite")
         self.cursor = self.bd.cursor()

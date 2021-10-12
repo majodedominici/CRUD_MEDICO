@@ -1,5 +1,7 @@
 #! /usr/bin/python3
 import sys
+from RepositorioConsultas import RepositorioConsultas
+from Consulta import Consulta
 
 class Menu:
     '''muestra el menu y lanza la función elegida'''
@@ -15,8 +17,8 @@ class Menu:
             "7": self.listar_consulta,
             "8": self.listar_cirugia,
             "9": self.salir
-
         }
+        self.repositorioConsultas = RepositorioConsultas()
 
     def mostrar_menu(self):
         '''Muestra el menú de opciones'''
@@ -58,29 +60,48 @@ Consultas y Cirugías:
         sys.exit(0)
 
     def agregar_consulta(self):
-        print("TBD")
+        hora= input("Ingrese la hora: ")
+        fecha = input("Ingrese la fecha: ")
+        nombrePaciente = input("Ingrese el nombre del paciente: ")
+        diagnostico = input("Ingrese el diagnostico: ")
+        numeroConsultorio = input("Ingrese el numero de consultorio donde será atendido: ")
+        nuevaConsulta = Consulta(fecha,hora,nombrePaciente,diagnostico,numeroConsultorio)
+        self.repositorioConsultas.store(nuevaConsulta)
 
     def agregar_cirugia(self):
         print("TBD")
 
     def modificar_consulta(self):
-        print("TBD")
+        '''Solicita el id de una consulta.Busca la consulta  y actualiza su texto.modifica la fecha y hora de la consulta'''
+        id = input("ingrese el id de la consulta a modificar: ")
+        fecha = input("Ingrese la fecha correcta: ")
+        hora = input("Ingrese la hora correcta: ")
+
+
+        self.repositorioConsultas.update(id, fecha , hora)
 
     def modificar_cirugia(self):
         print("TBD")
 
 
     def eliminar_consulta(self):
-        print("TBD")
+        id = input("Ingrese el id de consulta a borrar")
+        self.repositorioConsultas.delete(id)
 
     def eliminar_cirugia(self):
         print("TBD")
 
     def listar_consulta(self):
-        print("TBD")
+        consultas = self.repositorioConsultas.get_all()
+        for i in consultas:
+             print(i.id, i.fecha, i.hora, i.numeroConsultorio, i.diagnostico, i.nombrePaciente)
+
 
     def listar_cirugia(self):
         print("TBD")
+
+
+
 # Esta parte del código está fuera de la clase Menu.
 # Si este archivo es el programa principal, entonces llamamos al método
 # ejecutar().
