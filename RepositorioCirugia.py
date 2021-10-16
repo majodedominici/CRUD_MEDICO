@@ -34,7 +34,7 @@ class RepositorioCirugia(Repositorio):
                 En caso de éxito, retorna el id de la cirugia, número generado por la base
                 de datos. En caso de fracaso, retorna 0 '''
         try:
-            query = "INSERT INTO cirugias ( fecha,hora,nombrePaciente,diagnostico,numeroQuirofano, horasAyuno, instrumentadorQuirurgico) VALUES (?, ? , ? , ? , ?, ?, ? )"
+            query = "INSERT INTO cirugia ( fecha,hora,nombrePaciente,diagnostico,numeroQuirofano, horasAyuno, instrumentadorQuirurgico) VALUES (?, ? , ? , ? , ?, ?, ? )"
             result = self.cursor.execute(query, [cirugia.fecha, cirugia.hora, cirugia.nombrePaciente, cirugia.diagnostico, cirugia.numeroQuirofano, cirugia.horasAyuno, cirugia.instrumentadorQuirurgico])
             cirugia.id = result.lastrowid
 
@@ -48,7 +48,7 @@ class RepositorioCirugia(Repositorio):
         '''Recibe un objeto Cirugia y lo elimina de la Base de Datos.
                 Retorna True si tuvo éxito, False de lo contrario.'''
         try:
-            query = "DELETE FROM cirugias WHERE id = ?"
+            query = "DELETE FROM cirugia WHERE id = ?"
             self.cursor.execute(query, [id])
             c = self.cursor.rowcount
             if c == 0:
@@ -64,7 +64,7 @@ class RepositorioCirugia(Repositorio):
     def update(self, id, fecha, hora):
         '''Recibe un objeto cirugia y actualiza sus datos en la base de datos, dependiendo el id que ingrese el usuario'''
         try:
-            query = "UPDATE cirugias SET fecha = ?, hora = ? WHERE id = ?"
+            query = "UPDATE cirugia SET fecha = ?, hora = ? WHERE id = ?"
             result = self.cursor.execute(query, [fecha, hora, id])
             if result.rowcount == 0:
                 self.bd.rollback()
